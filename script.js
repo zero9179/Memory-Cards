@@ -1,7 +1,7 @@
 const cardContainer = document.getElementById("card-container");
 const countShow = document.getElementById("countShow");
 const countDownContainer = document.getElementById("countDown-container");
-// const arr = ["A", "B", "C", "D", "A", "B", "C", "D"];
+
 let arr = [
   { name: "A", img: "./assets/mongoDB.png" },
   { name: "B", img: "./assets/express.png" },
@@ -13,9 +13,8 @@ let arr = [
   { name: "D", img: "./assets/node.png" },
 ];
 
-let arrLength = arr.length / 2; //for checking all flipped
+let arrLength = arr.length / 2;
 
-// function for suffle Array
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -30,28 +29,25 @@ const gameStart = () => {
     const imgDiv = document.createElement("div");
     imgDiv.style.backgroundImage = `url(${item.img})`;
     imgDiv.classList.add("imgHidden");
+    imgDiv.style.opacity = "0";
 
     const card = document.createElement("div");
     card.appendChild(imgDiv);
-    card.classList.add("card", "temp"); // <-- include .temp for center animation
+    card.classList.add("card", "temp");
     card.dataset.value = item.name;
     card.dataset.index = idx;
-    card.textContent = "";
 
-    // delay the animation to stagger them
     card.style.animationDelay = `${idx * 100}ms`;
 
-    // Append to grid
     cardContainer.appendChild(card);
 
-    // After animation finishes (600ms + delay), switch to grid
     setTimeout(() => {
-      card.classList.remove("temp"); // removes absolute
+      card.classList.remove("temp");
       card.style.position = "";
       card.style.transform = "";
       card.style.opacity = "";
       card.style.animation = "";
-    }, 100 + idx * 100); // total = animation duration + delay
+    }, 100 + idx * 100);
 
     card.addEventListener("click", handleClick);
   });
@@ -81,23 +77,25 @@ function handleClick(e) {
   count++;
   countShow.textContent = count;
 
-  // let selectedCard = e.target;
-  let selectedCard = e.target;
-
+  let selectedCard = e.target.closest(".card");
 
   if (lock || selectedCard.classList.contains("flipped")) return;
-  console.log("selected:", selectedCard.dataset.value);
 
   selectedCard.classList.add("flipped");
-  selectedCard.textContent = selectedCard.dataset.value;
- 
+
+  const imgDiv = selectedCard.querySelector(".imgHidden");
+  if (imgDiv) {
+    imgDiv.style.opacity = "1";
+  } else {
+    console.warn("imgHidden not found in:", selectedCard);
+  }
+
   if (!first) {
     first = selectedCard;
   } else {
     second = selectedCard;
     lock = true;
 
-    //if mattched
     if (first.dataset.value === second.dataset.value) {
       allFlipped++;
       first.classList.add("flipped");
@@ -111,15 +109,19 @@ function handleClick(e) {
       setTimeout(() => {
         first.classList.remove("flipped", "slide");
         second.classList.remove("flipped", "slide");
-        first.textContent = "";
-        second.textContent = "";
+
+        const img1 = first.querySelector(".imgHidden");
+        const img2 = second.querySelector(".imgHidden");
+        if (img1) img1.style.opacity = "0";
+        if (img2) img2.style.opacity = "0";
+
         first = null;
         second = null;
         lock = false;
       }, 800);
     }
   }
-  // ======= If all Flipped ==========
+
   if (allFlipped === arrLength) {
     clearInterval(intervalId);
     cardContainer.innerHTML = "";
@@ -132,8 +134,7 @@ function handleClick(e) {
     restart.textContent = "Replay";
     restart.addEventListener("click", restartGame);
 
-    // =================output in card container =======================
-    wonDisplay.innerHTML = `<h1>You Won in ${time} and ${count} chance</h1>`;
+    wonDisplay.innerHTML = `<h1>You Won in <span style="color: red;">${time}</span> s and ${count} chance</h1>`;
     wonDisplay.appendChild(restart);
     cardContainer.appendChild(wonDisplay);
 
@@ -158,8 +159,6 @@ function restartGame() {
   gameStart();
 }
 
-// ==============timer function ======================
-
 function timer() {
   startS++;
   if (startS === 60) {
@@ -168,6 +167,5 @@ function timer() {
   }
   let seconds = startS < 10 ? `0${startS}` : startS;
   let minutes = startM < 10 ? `0${startM}` : startM;
-  // console.log("time", minutes, ":", seconds);
   return `${minutes}:${seconds}`;
 }
