@@ -1,0 +1,41 @@
+@media (min-width: 600px) {
+  #card-container {
+    grid-template-columns: repeat(3, 1fr); /* change 4 */
+  }
+  .card {
+    width: 150px; /* change 170 */
+  }
+}
+
+@media (min-width: 768px) {
+  #main-container section {
+    width: 90%; /* change 75 */
+    height: 95%; /* change 90 */
+    border-radius: 1rem; /* change 16*/
+    overflow: hidden;
+  }
+  #card-container {
+    grid-template-columns: repeat(4, 1fr); /* change 4 */
+  }
+  #heading-container h1{
+    font-size: 3rem;
+  }
+  .card {
+    width: 150px; /* change 170 */
+  }
+}
+
+@media (min-width: 1024px) {
+  #main-container section {
+    width: 75%; /* change 75 */
+    height: 90%; /* change 90 */
+    border-radius: 16px; /* change 16*/
+  }
+  #card-container {
+    grid-template-columns: repeat(4, 1fr); /* change 4 */
+  }
+  
+  .card {
+    width: 170px; /* change 170 */
+  }
+}

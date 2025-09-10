@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Card</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&family=Rubik+Moonrocks&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="./style.css" /> -->
+    <link rel="stylesheet" href="./chat.css" />
+    <link rel="stylesheet" href="./responsive.css" />
+  </head>
+  <body>
+    <main id="main-container">
+      <section>
+        <div id="heading-container">
+          <h1>Memory Card Game</h1>
+          <div id="game-dashboard">
+            <div id="game-status">
+              <h3 id="countDown-container">00:00</h3>
+              <h3>Chance: <span id="countShow">0</span></h3>
+            </div>
+            <div onclick="restartGame()" style="scale: 0.7">
+              <img src="./assets/refresh.svg" alt="reset" />
+            </div>
+          </div>
+        </div>
+        <div id="card-container"></div>
+      </section>
+    </main>
+    <!-- <script src="./script.js"></script> -->
+    <script src="./chat.js"></script>
+  </body>
+</html>
