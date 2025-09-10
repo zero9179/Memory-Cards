@@ -117,7 +117,7 @@ function handleClick(e) {
         first = null;
         second = null;
         lock = false;
-      }, 800);
+      }, 600);
     }
   }
 
