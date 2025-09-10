@@ -17,7 +17,7 @@ A fun and interactive **Memory Card Game** where players try to find matching pa
 
 ## Demo 🖥️
 
-![Memory Card Game Screenshot](./assets/Screenshot.png)
+![Memory Card Game Screenshot](/assets/Screenshot.png)
 
 ---
 
