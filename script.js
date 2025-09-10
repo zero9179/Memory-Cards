@@ -69,7 +69,6 @@ function handleClick(e) {
   if (firstClick) {
     firstClick = false;
     intervalId = setInterval(() => {
-      time = timer();
       countDownContainer.textContent = timer();
     }, 1000);
   }
@@ -167,5 +166,6 @@ function timer() {
   }
   let seconds = startS < 10 ? `0${startS}` : startS;
   let minutes = startM < 10 ? `0${startM}` : startM;
+  time = `${minutes}:${seconds}`
   return `${minutes}:${seconds}`;
 }
